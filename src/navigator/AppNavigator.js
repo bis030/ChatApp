@@ -12,6 +12,7 @@ import ChatScreen from '../screens/ChatScreen';
 import Inbox from '../screens/Inbox';
 import Guff from '../screens/Guff';
 import ServerDetailScreen from '../screens/ServerDetailScreen';
+import GroupChatScreen from '../screens/GroupChatScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -40,6 +41,8 @@ const AppNavigator = () => {
             name="Guff" component={Guff} options={ {headerShown:true }}/>
             <Stack.Screen 
             name="ServerDetailScreen" component={ServerDetailScreen} options={ {headerShown:true}}/>
+            <Stack.Screen 
+            name="GroupChatScreen" component={GroupChatScreen} options={ {headerShown:true}}/>
             
         </Stack.Navigator>
     </NavigationContainer>

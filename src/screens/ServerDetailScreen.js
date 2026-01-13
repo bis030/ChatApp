@@ -12,8 +12,10 @@ import {
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const ServerDetailScreen = () => {
+    const navigation = useNavigation();
   const route = useRoute();
   const { serverId, serverName } = route.params;
 
@@ -150,23 +152,28 @@ const ServerDetailScreen = () => {
 
   const renderChannelItem = ({ item }) => (
     <TouchableOpacity 
-      style={styles.channelItem}
-      onPress={() => {
-        Alert.alert('Channel', `Opening ${item.displayName}`);
-      }}
-    >
-      <View style={styles.channelIcon}>
-        <Text style={styles.channelHash}>#</Text>
-      </View>
-      <View style={styles.channelInfo}>
-        <Text style={styles.channelName}>{item.displayName}</Text>
-        {item.description ? (
-          <Text style={styles.channelDescription} numberOfLines={1}>
-            {item.description}
-          </Text>
-        ) : null}
-      </View>
-    </TouchableOpacity>
+    style={styles.channelItem}
+    onPress={() => {
+      navigation.navigate('GroupChatScreen', {
+        serverId: serverId,
+        channelId: item.id,
+        channelName: item.displayName,
+        userId: userId,
+      });
+    }}
+  >
+    <View style={styles.channelIcon}>
+      <Text style={styles.channelHash}>#</Text>
+    </View>
+    <View style={styles.channelInfo}>
+      <Text style={styles.channelName}>{item.displayName}</Text>
+      {item.description ? (
+        <Text style={styles.channelDescription} numberOfLines={1}>
+          {item.description}
+        </Text>
+      ) : null}
+    </View>
+  </TouchableOpacity>
   );
 
   return (

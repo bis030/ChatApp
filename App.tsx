@@ -1,45 +1,26 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from "react";
+import {View,Text, StyleSheet } from "react-native";
+import 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import SignUp from "./src/screens/SignUp";
+import Login from "./src/screens/Login";
+import AppNavigator from "./src/navigator/AppNavigator";
+import  firebase  from '@react-native-firebase/app';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
 
-  return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
+const App = () =>
+{
+
+  return(
+    <GestureHandlerRootView>
+
+      <AppNavigator/>
+    </GestureHandlerRootView>
+      
+    
   );
-}
+} ;
 
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;

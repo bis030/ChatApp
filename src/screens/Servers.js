@@ -13,8 +13,11 @@ import {
 } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 const Servers = () => {
+  const navigation = useNavigation();
+
   const [userId, setUserId] = useState('');
   const [servers, setServers] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -32,6 +35,10 @@ const Servers = () => {
       setUserId(uid || '');
     };
     getUserId();
+
+
+
+
   }, []);
 
   // 🔑 Listen to servers where user is a member
@@ -95,7 +102,16 @@ const Servers = () => {
   };
 
   const renderServerItem = ({ item }) => (
-    <TouchableOpacity style={styles.serverItem}>
+    <TouchableOpacity style={styles.serverItem}
+    
+     onPress={() =>
+        navigation.navigate('ServerDetailScreen', {
+          serverId: item.id,
+          serverName: item.name,
+        })
+      }
+    
+    >
       <Image
         source={{ uri: item.icon }}
         style={styles.serverIcon}
